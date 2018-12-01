@@ -24,7 +24,14 @@ import hashlib
 import logging
 import os
 import tempfile
-import urllib.request, urllib.error, urllib.parse
+if sys.version_info.major < 3:
+    from urllib2 import Request, urlopen, quote
+    from urllib2 import URLError
+    from urlparse import urlparse
+ else:
+    from urllib.request import Request, urlopen, urljoin, quote
+    from urllib.error import URLError
+    from urllib.parse import urlparse
 import warnings
 from urllib.parse import urlsplit
 from .simplexml import SimpleXMLElement, TYPE_MAP, REVERSE_TYPE_MAP, OrderedDict
